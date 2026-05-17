@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .product { border: 1px solid #ddd; padding: 10px; margin: 10px; width: 200px; display: inline-block; }
+        .cart { position: fixed; top: 20px; right: 20px; background: #f0f0f0; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Our Store</h1>
+    <div id="products"></div>
+    <div class="cart">Cart: <span id="cart-count">0</span></div>
+
+    <script>
+        // Simple demo products
+        const products = [
+            {id:1, name:'Wireless Headphones', price:79.99},
+            {id:2, name:'Smart Watch', price:199.99},
+            {id:3, name:'Laptop Sleeve', price:29.99}
+        ];
+
+        let cart = [];
+
+        function renderProducts() {
+            const container = document.getElementById('products');
+            container.innerHTML = products.map(p => `
+                <div class="product">
+                    <h3>${p.name}</h3>
+                    <p>$${p.price}</p>
+                    <button onclick="addToCart(${p.id})">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            document.getElementById('cart-count').textContent = cart.length;
+            alert(`${product.name} added to cart!`);
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
